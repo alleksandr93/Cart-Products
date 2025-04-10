@@ -6,11 +6,11 @@ import {useSelector} from 'react-redux';
 import {Link} from 'react-router';
 
 type PropsType = {
-    onAddClick: () => void;
+
 }
 
 export const FilterButtons = ({
-                                  onAddClick,
+
                               }: PropsType) => {
     const app = useSelector(selectApp);
     const dispatch = useAppDispatch()
@@ -45,7 +45,6 @@ export const FilterButtons = ({
 
             <Link to={'/CreateCardForm'}
                 className={`${styles.button} ${styles.addButton}`}
-                onClick={onAddClick}
                 aria-label={'Add'}
             >
                 <span className={styles.buttonIcon}>+</span>

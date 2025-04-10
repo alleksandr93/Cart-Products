@@ -7,6 +7,8 @@ import {useAppSelector} from '../hooks/useAppSelector.ts';
 import {FilterButtons} from '../FilterButtons/FilterButtons.tsx';
 import {Fade} from 'react-awesome-reveal';
 import {AnimatePresence,motion} from 'framer-motion';
+import {ProductNotFound} from '../ProductNotFound/ProductNotFound.tsx';
+
 
 
 export const Products = () => {
@@ -40,12 +42,13 @@ export const Products = () => {
                 filterStatus={setSearchStatus}
                 products={products}
             />
-            <FilterButtons onAddClick={() => {}} />
+            <FilterButtons  />
+
             <div className={styles.cardsContainer}>
                 <AnimatePresence>
-                { searchStatus==='Not Found'? <p className={styles.notFound}>Not Found</p> : filterProducts().map((p) => (
+                { searchStatus==='Not Found'? <div className={styles.notFound}><ProductNotFound  /> </div> : filterProducts().map((p) => (
                     <Fade triggerOnce key={p.id}>
-                        <motion.div  style={{}}
+                        <motion.div
                                     initial={{ x: 300, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     exit={{ x: -300, opacity: 0 }}
@@ -56,6 +59,7 @@ export const Products = () => {
 
                 ))}
                 </AnimatePresence>
+
             </div>
         </section>
     );

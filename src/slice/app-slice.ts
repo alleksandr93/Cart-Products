@@ -19,4 +19,4 @@ export const appSlice = createSlice({
 })
 export const {setFilterAC} = appSlice.actions;
 export const appReducer = appSlice.reducer
-export const {selectApp} = appSlice.selectors
+export const {selectApp} =appSlice.selectors
