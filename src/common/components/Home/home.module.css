@@ -1,39 +1,47 @@
 .mainWrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
+    position: fixed; /* или absolute, в зависимости от вашей структуры */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../assets/images/woman.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+
 }
 
 .info {
-    color: #fff;
-    font-size: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-shadow: 3px 3px 2px #000;
 }
-
-.size {
-    font-size: 10rem;
+.titleH1{
+display: none;
 }
-
-@media (max-width: 768px) {
-    .info {
-        font-size: 1.5rem;
+.title {
+    color: white;
+    font-size: 4rem;
+    text-shadow: 3px 3px 3px #000;
+}
+@media (max-width: 992px) {
+    .title {
+        font-size: 3rem;
     }
 
-    .size {
-        font-size: 7rem;
+}
+@media (max-width: 650px) {
+    .title {
+        font-size: 2.5rem;
     }
 }
 @media (max-width: 480px) {
-    .info {
-        font-size: 1rem;
+    .title {
+        font-size: 2rem;
     }
 
-    .size {
-        font-size: 5rem;
-    }
 }

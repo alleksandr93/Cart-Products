@@ -1,20 +1,22 @@
 import {useState} from 'react';
-import styles from './PhotoGallery.module.css';
+import styles from './products.module.css';
 import {Card} from '../Card/Card.tsx';
 import {Search} from '../Search/Search.tsx';
 import {selectProducts} from '../../../slice/products-slice.ts';
 import {useAppSelector} from '../hooks/useAppSelector.ts';
 import {FilterButtons} from '../FilterButtons/FilterButtons.tsx';
+import {Fade} from 'react-awesome-reveal';
+import {AnimatePresence,motion} from 'framer-motion';
 
 
-export const PhotoGallery = () => {
+export const Products = () => {
 
     const [searchStatus, setSearchStatus] = useState<string | null>(null);
 
 
     const products = useAppSelector(selectProducts);
 
-
+    console.log(products);
     // Функция фильтрации
     const filterProducts = () => {
         if (searchStatus === 'Not Found') {
@@ -23,7 +25,7 @@ export const PhotoGallery = () => {
 
         if (searchStatus) {
             return products.filter(product =>
-                product.description.toLowerCase().includes(searchStatus.toLowerCase())
+                product.title.toLowerCase().includes(searchStatus.toLowerCase())
             );
         }
 
@@ -40,12 +42,20 @@ export const PhotoGallery = () => {
             />
             <FilterButtons onAddClick={() => {}} />
             <div className={styles.cardsContainer}>
+                <AnimatePresence>
                 { searchStatus==='Not Found'? <p className={styles.notFound}>Not Found</p> : filterProducts().map((p) => (
-                    <Card
-                        key={p.id}
-                        products={p}
-                    />
+                    <Fade triggerOnce key={p.id}>
+                        <motion.div  style={{}}
+                                    initial={{ x: 300, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    exit={{ x: -300, opacity: 0 }}
+                                    layout>
+                        <Card products={p}/>
+                        </motion.div>
+                    </Fade>
+
                 ))}
+                </AnimatePresence>
             </div>
         </section>
     );

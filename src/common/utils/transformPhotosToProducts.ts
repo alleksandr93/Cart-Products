@@ -5,7 +5,7 @@ export const transformPhotosToProducts = (photos: BaseResponce): ProductsType[] 
         id: photo.id,
         title: photo.user.name,
         imageUrl: photo.urls.small,
-        description: photo.alt_description || 'Описание отсутствует',
+        description: photo.alt_description || 'no description',
         avatarUrl: photo.user.profile_image.small,
         numberLike: photo.likes,
         like:false

@@ -1,14 +1,21 @@
 import styles from './home.module.css'
-import { FaLongArrowAltUp } from "react-icons/fa";
+import Typewriter from 'typewriter-effect';
 
 export const Home = () => {
     return (
         <main className={styles.mainWrapper}>
             <div className={styles.info}>
-                <FaLongArrowAltUp className={styles.size}/>
-                <h1>
-                    Нажмите на Products
+                <h1  className={styles.titleH1}>
+                   Welcome to my gallery!
                 </h1>
+                <div className={styles.title}>
+                    <Typewriter  options={{
+                        strings: ['Welcome to my gallery!',],
+                        autoStart: true,
+                        loop: true,
+                    }}/>
+                </div>
+
             </div>
         </main>
     );

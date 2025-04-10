@@ -46,14 +46,24 @@ export const productsSlice = createSlice({
         }),
 
         addProductAC: create.reducer<{ formData: ProductsType }>((state, action)=>{
-            state.push({...action.payload.formData})
+            state.unshift({...action.payload.formData})
             sessionStorage.setItem('myArrayKey', JSON.stringify(state));
-        })
+        }),
+        changeTitleProductAC:create.reducer<{id:string,title:string}>((state, action)=>{
+            const title=state.find(el=>el.id===action.payload.id)
+            if(title) title.title=action.payload.title
+            sessionStorage.setItem('myArrayKey', JSON.stringify(state));
+        }),
+        changeDescriptionProductAC:create.reducer<{id:string,description:string}>((state, action)=>{
+            const description=state.find(el=>el.id===action.payload.id)
+            if(description) description.description=action.payload.description
+            sessionStorage.setItem('myArrayKey', JSON.stringify(state));
+        }),
     }),
     selectors: {
         selectProducts: state => state
     }
 })
-export const {deleteProductAC, setProductsAC, likeProductAC, filterFavoriteAC,filterAllAC,addProductAC} = productsSlice.actions;
+export const {deleteProductAC, setProductsAC, likeProductAC, filterFavoriteAC,filterAllAC,addProductAC,changeTitleProductAC,changeDescriptionProductAC} = productsSlice.actions;
 export const productsReducer = productsSlice.reducer
 export const {selectProducts} = productsSlice.selectors

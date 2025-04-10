@@ -1,0 +1,13 @@
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #d32f2f;
+}
