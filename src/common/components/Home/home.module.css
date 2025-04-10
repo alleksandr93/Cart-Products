@@ -1,0 +1,16 @@
+.mainWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+height: 100vh;
+}
+
+.info{
+    color: #fff;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 3px 3px 2px #000;
+}
