@@ -83,7 +83,7 @@ type TopicSubmissions = {
 };
 
 // Основной тип для фото
-export type Photo = {
+ type Photo = {
     id: string;
     slug: string;
     alternative_slugs: AlternativeSlugs;
@@ -109,4 +109,13 @@ export type Photo = {
 };
 
 // Тип для массива фотографий
-export type PhotosResponse = Photo[];
+export type BaseResponce = Photo[];
+export type ProductsType = {
+    id: string
+    urlImg: string
+    urlDescription: string
+    photoUserProfile: string
+    nameUser: string
+    numberLike: number
+    like:boolean
+}

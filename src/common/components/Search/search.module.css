@@ -1,50 +1,21 @@
-.gallery {
-margin-top: 120px;
-    padding: 0 20px;
+.searchWrapper {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 70px;
 }
-
-.loading, .error {
-    text-align: center;
-    padding: 40px;
-    font-size: 1.2rem;
-}
-
-.error {
-    color: #d32f2f;
-}
-
-.cardsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-@media (max-width: 768px) {
-    .cardsContainer {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 16px;
-    }
-}
-/*?\--------------------------------------------*/
 
 .searchContainer {
     display: flex;
     align-items: center;
-    max-width: 400px;
-    margin: 0 auto 30px;
     position: relative;
-
 }
 
 .searchInput {
     padding: 12px 20px;
-    /*padding-right: 50px;*/
     width: 100%;
     font-size: 18px;
     font-weight: 500;
-    color: #494949;
+    color: #ffffff;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #494949;
     border-radius: 30px;
@@ -87,3 +58,5 @@ margin-top: 120px;
 .searchInput:focus + .searchButton .searchIcon {
     fill: white;
 }
+
+

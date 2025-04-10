@@ -1,32 +1,41 @@
 import styles from './Card.module.css';
 import {useState} from 'react';
-import type {Photo} from '../../../types/types.ts';
-import { AiFillDelete } from "react-icons/ai";
+
+import {AiFillDelete} from 'react-icons/ai';
+import type {ProductsType} from '../../../types/types.ts';
+import {useAppDispatch} from '../hooks/useAppDispatch.ts';
+import {deleteProductAC} from '../../../reducers/products-slice.ts';
 
 type CardProps = {
-    photo: Photo;
-    onLike: (photoId: string) => void;
-    isLiked: boolean;
+    products: ProductsType;
+    onLike: (productsId: string, like: boolean) => void;
+
 }
 
-export const Card = ({photo, onLike, isLiked}: CardProps) => {
+export const Card = ({products, onLike}: CardProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useAppDispatch();
 
-    const handleLike = async (photoId: string) => {
+
+    const handleLike = async (productsId: string, like: boolean) => {
         setIsLoading(true);
-        try {
-            await onLike(photoId);
-        } finally {
-            setIsLoading(false);
-        }
-    }
+        onLike(productsId, like);
+        setIsLoading(false);
 
+    }
+    const handleDelete = () => {
+        setIsLoading(true);
+
+        dispatch(deleteProductAC({productId:products.id}))
+        setIsLoading(false);
+
+    }
     return (
         <div className={styles.card}>
             {/* Изображение */}
             <img
-                src={photo.urls.small}
-                alt={photo.alt_description || 'Фото'}
+                src={products.urlImg}
+                alt={products.urlDescription || 'Фото'}
                 className={styles.image}
                 loading="lazy" // Ленивая загрузка
             />
@@ -34,32 +43,32 @@ export const Card = ({photo, onLike, isLiked}: CardProps) => {
             {/* Контент карточки */}
             <div className={styles.content}>
                 <div className={styles.author}>
-                    {photo.user.profile_image?.small && (
+                    {products.photoUserProfile && (
                         <img
-                            src={photo.user.profile_image.small}
-                            alt={photo.user.name}
+                            src={products.photoUserProfile}
+                            alt={products.nameUser}
                             className={styles.avatar}
                         />
                     )}
-                    <h2 className={styles.title}>{photo.user.name}</h2>
+                    <h2 className={styles.title}>{products.nameUser}</h2>
                     {/* Кнопка лайка */}
                     <button
-                        onClick={() => handleLike(photo.id)}
+                        onClick={() => handleLike(products.id, products.like)}
                         disabled={isLoading}
-                        className={`${styles.likeButton} ${isLiked ? styles.liked : ''}`}
-                        aria-label={isLiked ? 'Убрать лайк' : 'Поставить лайк'}
+                        className={`${styles.likeButton} ${products.like ? styles.liked : ''}`}
+                        aria-label={products.like ? 'Убрать лайк' : 'Поставить лайк'}
                     >
                         <span className={styles.heartIcon}>♥</span>
                         <span className={styles.likesCount}>
-                        {isLoading ? '...' : photo.likes}
+                        {isLoading ? '...' : products.numberLike}
                     </span>
                     </button>
                 </div>
                 <p className={styles.description}>
-                    {photo.description ? photo.description : 'no description'}
+                    {products.urlDescription ? products.urlDescription : 'no description'}
                 </p>
-                <button className={styles.btnDelete} >
-                    <AiFillDelete  size={'2rem'} />
+                <button onClick={handleDelete} className={styles.btnDelete}>
+                    <AiFillDelete size={'2rem'}/>
                 </button>
             </div>
         </div>
