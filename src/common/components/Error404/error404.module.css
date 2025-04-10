@@ -1,0 +1,59 @@
+.errorContainer{
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+    margin: 70px auto;
+}
+
+
+.errorContainer h1{
+    font-size: 8rem;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+}
+.errorContainer h2{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.errorContainer p{
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+.errorContainer a{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #ff6b6b;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+}
+.errorContainer a:hover{
+
+        background-color: #ff4c4c;
+
+}
+@media (max-width: 768px) {
+    .errorContainer h1 {
+        font-size: 6rem;
+    }
+
+    .errorContainer  h2 {
+        font-size: 1.5rem;
+    }
+
+    .errorContainer  p {
+        font-size: 0.9rem;
+    }
+
+    .errorContainer  a {
+        font-size: 0.9rem;
+    }
+}

@@ -112,10 +112,12 @@ type TopicSubmissions = {
 export type BaseResponce = Photo[];
 export type ProductsType = {
     id: string
-    urlImg: string
-    urlDescription: string
-    photoUserProfile: string
-    nameUser: string
+    imageUrl: string
+    description: string
+    avatarUrl: string
+    title: string
     numberLike: number
     like:boolean
 }
+
+export type FilterType = 'all'|'favorite'

@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {productsReducer, productsSlice} from '../reducers/products-slice.ts';
+import {productsReducer, productsSlice} from '../slice/products-slice.ts';
+import {appReducer, appSlice} from '../slice/app-slice.ts';
 
 
 // создание store
 export const store = configureStore({
     reducer: {
         [productsSlice.name]: productsReducer,
+        [appSlice.name]: appReducer,
     },
 })
 

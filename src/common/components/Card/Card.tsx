@@ -1,73 +1,92 @@
 import styles from './Card.module.css';
 import {useState} from 'react';
-
 import {AiFillDelete} from 'react-icons/ai';
 import type {ProductsType} from '../../../types/types.ts';
 import {useAppDispatch} from '../hooks/useAppDispatch.ts';
-import {deleteProductAC} from '../../../reducers/products-slice.ts';
+import {deleteProductAC, likeProductAC} from '../../../slice/products-slice.ts';
+import {useNavigate} from 'react-router';
+
 
 type CardProps = {
     products: ProductsType;
-    onLike: (productsId: string, like: boolean) => void;
 
 }
 
-export const Card = ({products, onLike}: CardProps) => {
+export const Card = ({products}: CardProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useAppDispatch();
-
+    const navigate = useNavigate();
 
     const handleLike = async (productsId: string, like: boolean) => {
         setIsLoading(true);
-        onLike(productsId, like);
+        dispatch(likeProductAC({id:productsId, like}));
         setIsLoading(false);
-
     }
+
     const handleDelete = () => {
         setIsLoading(true);
-
-        dispatch(deleteProductAC({productId:products.id}))
+        dispatch(deleteProductAC({productId: products.id}));
         setIsLoading(false);
-
     }
+
+    const handleCardClick = (e: React.MouseEvent) => {
+        // Проверяем, не был ли клик по лайку или кнопке удаления
+        const target = e.target as HTMLElement;
+        const isLikeClicked = target.closest(`.${styles.likeButton}`);
+        const isDeleteClicked = target.closest(`.${styles.btnDelete}`);
+
+        if (!isLikeClicked && !isDeleteClicked) {
+            navigate(`/products/${products.id}`);
+        }
+    }
+
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleCardClick}>
             {/* Изображение */}
             <img
-                src={products.urlImg}
-                alt={products.urlDescription || 'Фото'}
+                src={products.imageUrl}
+                alt={products.description || 'Photo'}
                 className={styles.image}
-                loading="lazy" // Ленивая загрузка
+                loading="lazy"
             />
 
             {/* Контент карточки */}
             <div className={styles.content}>
                 <div className={styles.author}>
-                    {products.photoUserProfile && (
+                    {products.avatarUrl && (
                         <img
-                            src={products.photoUserProfile}
-                            alt={products.nameUser}
+                            src={products.avatarUrl}
+                            alt={products.title}
                             className={styles.avatar}
                         />
                     )}
-                    <h2 className={styles.title}>{products.nameUser}</h2>
+                    <h2 className={styles.title}>{products.title}</h2>
                     {/* Кнопка лайка */}
                     <button
-                        onClick={() => handleLike(products.id, products.like)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleLike(products.id, products.like);
+                        }}
                         disabled={isLoading}
                         className={`${styles.likeButton} ${products.like ? styles.liked : ''}`}
                         aria-label={products.like ? 'Убрать лайк' : 'Поставить лайк'}
                     >
                         <span className={styles.heartIcon}>♥</span>
                         <span className={styles.likesCount}>
-                        {isLoading ? '...' : products.numberLike}
-                    </span>
+                            {isLoading ? '...' : products.numberLike}
+                        </span>
                     </button>
                 </div>
                 <p className={styles.description}>
-                    {products.urlDescription ? products.urlDescription : 'no description'}
+                    {products.description ? products.description : 'no description'}
                 </p>
-                <button onClick={handleDelete} className={styles.btnDelete}>
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete();
+                    }}
+                    className={styles.btnDelete}
+                >
                     <AiFillDelete size={'2rem'}/>
                 </button>
             </div>
