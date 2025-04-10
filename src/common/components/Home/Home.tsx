@@ -5,7 +5,7 @@ export const Home = () => {
     return (
         <main className={styles.mainWrapper}>
             <div className={styles.info}>
-                <FaLongArrowAltUp size={'10rem'} />
+                <FaLongArrowAltUp className={styles.size}/>
                 <h1>
                     Нажмите на Products
                 </h1>
