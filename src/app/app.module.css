@@ -5,9 +5,19 @@
 .loading, .error {
     text-align: center;
     padding: 40px;
-    font-size: 1.2rem;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  color: white;
 }
 
 .error {
     color: #d32f2f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 35px;
 }

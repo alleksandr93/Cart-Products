@@ -15,7 +15,7 @@ export const ProductPage = () => {
 
     const handleGoBack = () => {
         // Возвращаемся на предыдущую страницу
-        navigate(-1);
+        navigate('/products');
 
     };
     if (!product) {

@@ -1,11 +1,12 @@
 import {ChangeEvent, type KeyboardEvent, useState} from 'react'
-
+import style from './editableItem.module.css'
 type Props = {
     value: string
     onChange: (newTitle: string) => void
     disabled?: boolean
+    type?:'text' | 'textarea'
 }
-export const EditableSpan = ({value, onChange, disabled}: Props) => {
+export const EditableSpan = ({value, onChange, disabled,type}: Props) => {
     const [editMode, setEditMode] = useState(false)
     const [newTitle, setNewTitle] = useState(value)
 
@@ -33,9 +34,10 @@ export const EditableSpan = ({value, onChange, disabled}: Props) => {
     }
     return editMode ? (
         <input
+            className={`${type==='textarea'? style.textarea: style.text}`}
+            type={type}
             disabled={disabled}
             onChange={changeTitleHandler}
-            type="text"
             value={newTitle}
             onBlur={activateEditModeHandler}
             autoFocus

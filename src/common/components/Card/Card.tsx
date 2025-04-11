@@ -74,7 +74,7 @@ export const Card = ({products}: CardProps) => {
                         />
                     )}
                     <h2 className={styles.title}>
-                        <EditableSpan onChange={changeTitleHandler} value={products.title}/>
+                        <EditableSpan type={'text'} onChange={changeTitleHandler} value={products.title}/>
                     </h2>
                     {/* Кнопка лайка */}
                     <button
@@ -93,7 +93,7 @@ export const Card = ({products}: CardProps) => {
                     </button>
                 </div>
                 <p className={styles.description}>
-                    <EditableSpan value={products.description} onChange={changeDescriptionHandler}/>
+                    <EditableSpan type={'textarea'} value={products.description} onChange={changeDescriptionHandler}/>
 
                 </p>
                 <button
